@@ -85,7 +85,7 @@ public class ChooseAreaFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(currentLevel == LEVEL_PROVINCE){
                     selectedProvince = provinceList.get(position);
                     queryCities();
@@ -95,6 +95,17 @@ public class ChooseAreaFragment extends Fragment {
                 }
             }
         });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentLevel == LEVEL_COUNTY){
+                    queryCities();
+                } else if (currentLevel == LEVEL_CITY){
+                    queryProvinces();
+                }
+            }
+        });
+        queryProvinces();
     }
 
     /**
